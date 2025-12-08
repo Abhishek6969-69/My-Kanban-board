@@ -1,0 +1,101 @@
+:root {
+  --bg: #F7F8FA;
+  --column-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --border: #E5E7EB;
+  --text: #111827;
+  --text-muted: #6B7280;
+  /* card-specific text tokens — ensure cards use solid black text in light mode */
+  --card-text: #000000;
+  --card-muted: #4b5563; /* slightly darker muted for card body in light mode */
+  --card-height: 140px; /* fixed card height for consistent layout */
+  --primary: #5B6CFF;
+  --danger: #EF4444;
+  --muted-bg: #F3F4F6;
+}
+
+:root[data-theme="dark"] {
+  /* darker, more distinct surfaces for dark mode */
+  --bg: #071026;
+  --column-bg: #0b1220; /* column surface */
+  --card-bg: #0f1724; /* card surface slightly lighter than page */
+  --border: #1f2937;
+  --text: #e6eef8;
+  --text-muted: #9ca3af;
+  /* map card tokens to dark theme values to keep contrast */
+  --card-text: var(--text);
+  --card-muted: var(--text-muted);
+  --card-height: 140px;
+  --primary: #60a5fa;
+  --danger: #fda4a4;
+  --muted-bg: #071026;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+}
+
+/* Utility helpers for the design system */
+.card {
+  background: var(--column-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.soft-shadow {
+  box-shadow: 0 1px 3px rgba(17,24,39,0.04), 0 1px 2px rgba(17,24,39,0.06);
+}
+
+.card-strong {
+  box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+}
+/* Design token helpers */
+.drag-placeholder {
+  background: linear-gradient(180deg, rgba(91,108,255,0.06), rgba(86,204,242,0.03));
+  border: 1px dashed rgba(91,108,255,0.12);
+  min-height: 72px;
+  border-radius: 12px;
+}
+
+/* card surface (for inner surfaces like individual task cards) */
+.card-surface {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+/* Priority legend tooltip */
+.priority-legend { position: relative; display: inline-flex; align-items: center; }
+.priority-legend .tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  display: none;
+  width: 220px;
+  font-size: 13px;
+  z-index: 60;
+}
+.priority-legend:hover .tooltip { display: block; }
+.priority-dot { display: inline-block; width: 10px; height: 10px; border-radius: 9999px; margin-right: 8px; }
+
+.focus-accent:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(91,108,255,0.12);
+}
+@import "tailwindcss";
+
+

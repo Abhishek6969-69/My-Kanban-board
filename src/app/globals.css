@@ -1,0 +1,98 @@
+:root {
+  --bg: #F7F8FA;
+  --column-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --border: #E5E7EB;
+  --text: #111827;
+  --text-muted: #6B7280;
+  --primary: #3B82F6;
+  --danger: #EF4444;
+  --muted-bg: #F3F4F6;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1220;
+  --column-bg: #0f1724;
+  --card-bg: #0b1220;
+  --border: #1f2937;
+  --text: #e6eef8;
+  --text-muted: #9ca3af;
+  --primary: #60a5fa;
+  --danger: #fca5a5;
+  --muted-bg: #0b1220;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+body {
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+}
+
+/* Utility helpers for the design system */
+.card {
+  background: var(--column-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.soft-shadow {
+  box-shadow: 0 1px 3px rgba(17,24,39,0.04), 0 1px 2px rgba(17,24,39,0.06);
+}
+
+.card-strong {
+  box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+}
+:root {
+  --bg: #F7F8FA;
+  --column-bg: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --border: #E5E7EB;
+  --text: #111827;
+  --text-muted: #6B7280;
+  --primary: #3B82F6;
+  --danger: #EF4444;
+  --muted-bg: #F3F4F6;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b1220;
+  --column-bg: #0f1724;
+  --card-bg: #0b1220;
+  --border: #1f2937;
+  --text: #e6eef8;
+  --text-muted: #9ca3af;
+  --primary: #60a5fa;
+  --danger: #fca5a5;
+  --muted-bg: #0b1220;
+}
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply antialiased;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* Utility helpers for the design system */
+.card {
+  background: var(--column-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.soft-shadow {
+  box-shadow: 0 1px 3px rgba(17,24,39,0.04), 0 1px 2px rgba(17,24,39,0.06);
+}
+
+.card-strong {
+  box-shadow: 0 6px 18px rgba(17,24,39,0.06);
+}
