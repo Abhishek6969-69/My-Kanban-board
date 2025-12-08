@@ -11,17 +11,14 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-  <body className="min-h-screen" style={{ background: 'linear-gradient(135deg,var(--bg),rgba(255,255,255,0.02))' }}>
-        {/* Top navigation bar wrapper for SaaS look */}
+      {/* UI: full-screen layout */}
+      <body className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-950 dark:to-slate-800">
         <ThemeProvider>
           <SearchProvider>
-            <div className="shadow-sm border-b px-6 py-4 rounded-b-xl" style={{ background: 'var(--column-bg)', borderColor: 'var(--border)' }}>
-              <div className="max-w-7xl mx-auto">
-                <Header />
-              </div>
-            </div>
+            {/* Header is fixed at top (see Header.tsx). The board/app content lives in the full-viewport main below. */}
+            <Header />
 
-            <main className="max-w-7xl mx-auto p-6 md:p-10">
+            <main className="w-full">
               {children}
             </main>
           </SearchProvider>

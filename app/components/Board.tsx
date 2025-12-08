@@ -215,7 +215,8 @@ export default function Board() {
   const activeEditTask = editId ? tasks.find((t) => t.id === editId) : null;
 
   return (
-    <main className="min-h-screen p-8 md:p-14" style={{ background: 'var(--bg)' }}>
+    // UI: full-screen layout — leave space for fixed header (approx 72px)
+    <main className="min-h-[calc(100vh-72px)] w-full pt-20 mt-10 p-8 md:p-14" style={{ background: 'var(--bg)' }}>
       <div className="mb-10 flex items-center justify-between gap-6">
         <h2 className="text-2xl font-semibold" style={{ color: 'var(--text)' }}>My Kanban board</h2>
 
@@ -238,8 +239,9 @@ export default function Board() {
         <div className="flex items-center gap-2" style={{ color: 'var(--text)' }}>Loading board…</div>
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
-      <div className="overflow-x-auto">
-        <div className="flex items-start overflow-x-auto space-x-6 md:space-x-10 py-10 min-w-[1200px]">
+      {/* Columns area: full-width scrollable region */}
+      <div className="w-full overflow-x-auto">
+        <div className="w-full flex items-start gap-6 md:gap-10 py-10 min-w-[1200px]">
               {columns.map((col) => (
                 <Column
                   key={col.id}
