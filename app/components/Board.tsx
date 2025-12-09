@@ -66,7 +66,7 @@ export default function Board() {
       parsedTasks = [
         {
           id: nanoid(),
-          title: 'Welcome — try drag & drop',
+          title: 'try drag & drop',
           description: 'This is a sample task. You can drag me between lists.',
           columnId: 'col-today',
           createdAt: new Date().toISOString(),

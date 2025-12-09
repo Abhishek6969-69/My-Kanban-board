@@ -89,6 +89,20 @@ export default function TaskCard({
     }
   }
 
+  // UI: compute a safe text color depending on theme and chosen color
+  // Treat '#ffffff' (or 'white') as no color chosen.
+  // In light mode, when no explicit color is chosen we prefer a pure black token (--card-text).
+  // In dark mode, always use the theme text token so content remains visible.
+  const rawColor = (task.color || '').toString().trim();
+  const normalized = rawColor.toLowerCase();
+  const hasColor = normalized && normalized !== '' && normalized !== '#ffffff' && normalized !== 'white';
+  let textColor: string;
+  if (theme === 'dark') {
+    textColor = 'var(--text)';
+  } else {
+    textColor = hasColor ? getContrastColor(rawColor || '#FFFFFF') : 'var(--card-text)';
+  }
+
   return (
     <article
       ref={setNodeRef}
@@ -100,38 +114,38 @@ export default function TaskCard({
       <div
         // UI: card body with padding, rounded corners, and min height
         className="rounded-lg p-4 shadow-sm hover:shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-400 relative overflow-visible flex flex-col w-full min-h-[90px]"
-        style={{
+          style={{
           background: theme === 'light' ? (task.color ?? '#FFFFFF') : 'var(--card-bg)',
           border: '1px solid var(--border)',
-          color: getContrastColor(task.color ?? '#FFFFFF'),
+          color: textColor,
           width: '100%'
         }}
         tabIndex={0}
       >
         {/* Color accent: in dark mode show a thin left stripe; in light mode tint the whole card with chosen color */}
-        {task.color && theme === 'dark' && (
+        {hasColor && theme === 'dark' && (
           <div
             aria-hidden
             className="absolute left-0 top-0 bottom-0"
-            style={{ width: 6, background: darkenHex(task.color, 0.45), opacity: 0.98 }}
+            style={{ width: 6, background: darkenHex(rawColor || '#FFFFFF', 0.45), opacity: 0.98 }}
           />
         )}
-        <div className={task.color && theme === 'dark' ? 'pl-4' : ''}>{/* ensure content not under the stripe */}
+        <div className={hasColor && theme === 'dark' ? 'pl-4' : ''}>{/* ensure content not under the stripe */}
           <div className="relative">
             {/* UI: action buttons in top-right corner */}
-            <div className="absolute right-2 top-2 flex items-center gap-2">
-              <button
+                <div className="absolute right-2 top-2 flex items-center gap-2">
+                <button
                 onClick={() => onEdit(task.id)}
                 className="rounded-md px-2 py-1 text-sm transition-all duration-200 focus:outline-none bg-transparent border border-transparent hover:border-gray-200"
-                style={{ background: 'transparent', border: '1px solid var(--border)', color: getContrastColor(task.color ?? '#FFFFFF') }}
+                  style={{ background: 'transparent', border: '1px solid var(--border)', color: 'inherit' }}
                 aria-label="Edit task"
               >
                 Edit
               </button>
-              <button
+                <button
                 onClick={() => onDelete(task.id)}
                 className="rounded-md px-2 py-1 text-sm transition-all duration-200 focus:outline-none"
-                style={{ background: 'transparent', border: '1px solid var(--border)', color: 'var(--danger)' }}
+                  style={{ background: 'transparent', border: '1px solid var(--border)', color: 'var(--danger)' }}
                 aria-label="Delete task"
               >
                 Delete
@@ -141,7 +155,7 @@ export default function TaskCard({
                   onClick={() => setShowPicker((s) => !s)}
                   aria-label="Change color"
                   className="w-6 h-6 rounded-md border"
-                  style={{ background: task.color ?? '#FFFFFF', border: '1px solid var(--border)' }}
+                  style={{ background: rawColor || '#FFFFFF', border: '1px solid var(--border)' }}
                 />
                 {showPicker && (
                   <div className="absolute right-0 mt-2 p-2" style={{ background: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 8, boxShadow: '0 6px 18px rgba(2,6,23,0.06)', zIndex: 50 }}>
@@ -174,9 +188,9 @@ export default function TaskCard({
                       aria-hidden
                     />
                   )}
-                  <h4 className="font-semibold text-base md:text-lg" style={{ color: getContrastColor(task.color ?? '#FFFFFF') }}>{task.title}</h4>
+                  <h4 className="font-semibold text-base md:text-lg" style={{ color: textColor }}>{task.title}</h4>
                 </div>
-                <div className="mt-3 text-sm" style={{ color: getContrastColor(task.color ?? '#FFFFFF') }}>
+                <div className="mt-3 text-sm" style={{ color: textColor }}>
                   <p className="wrap-break-word whitespace-normal" style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}>
                     {task.description ? task.description : <em>No description</em>}
                   </p>
